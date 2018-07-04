@@ -28,7 +28,7 @@
 #define ECHO D1
 // Max time to wait for sound to reflect. Limits our max distance but
 // caps function duration
-#define US_TIMEOUT_CAP 90000
+#define US_TIMEOUT_CAP 70000
 
 // Sensor tolerance (cm)
 #define SENSOR_TOLERANCE_CM 5

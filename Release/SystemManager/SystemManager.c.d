@@ -37,7 +37,10 @@ SystemManager\SystemManager.c.o: ..\SystemManager\SystemManager.c \
  C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\variants\nodemcu/../generic/common.h \
  ..\SystemManager\../GarageSensor/GarageSensor.h \
  ..\SystemManager\../MQTT/MQTT.h \
- ..\SystemManager\../SystemManager/SystemManager_pvt.h
+ ..\SystemManager\../SystemManager/SystemManager_pvt.h \
+ ..\SystemManager\../SystemManager/../Executive/Executive.h \
+ ..\SystemManager\../SystemManager/../GarageSensor/GarageSensor.h \
+ ..\SystemManager\../SystemManager/../MQTT/MQTT.h
 
 ..\SystemManager\../Utilities/Utilities.h:
 
@@ -116,3 +119,9 @@ C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\variants\nodemc
 ..\SystemManager\../MQTT/MQTT.h:
 
 ..\SystemManager\../SystemManager/SystemManager_pvt.h:
+
+..\SystemManager\../SystemManager/../Executive/Executive.h:
+
+..\SystemManager\../SystemManager/../GarageSensor/GarageSensor.h:
+
+..\SystemManager\../SystemManager/../MQTT/MQTT.h:

@@ -89,7 +89,7 @@ extern "C"
 #endif
 
 // Must be called prior to any of the other functions within this module
-extern void InitGarageState();
+extern void InitGarageSensor();
 
 // Must be called once per software frame. Note, the speed of sound is slow.
 // Therefore, the duration of this function is variable depending on sensor
@@ -98,7 +98,7 @@ extern void ManageGarageSensor();
 
 // This is the only interface to data within this module. Caller should be
 // careful to check that the garage sensor has valid data
-extern void GarageSensorGetData(GarageSensorOutput_structType *data);
+extern void GetGarageSensorData(GarageSensorOutput_structType *data);
 
 #if defined (__cplusplus)
 }

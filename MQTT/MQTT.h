@@ -48,6 +48,7 @@ typedef enum
 typedef struct
 {
 	doorCommand_enumType doorCmd;
+	unsigned numReconnects;
 
 }MQTTOutput_structType;
 
@@ -80,7 +81,7 @@ extern "C"
 extern void InitMQTTCom();
 extern void ManageMQTTCom();
 extern void SendMQTTMsg(mqttMsgType_StructType msg);
-extern void MQTTGetData(MQTTOutput_structType *output);
+extern void GetMQTTData(MQTTOutput_structType *output);
 
 #if defined (__cplusplus)
 }

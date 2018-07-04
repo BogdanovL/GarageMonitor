@@ -58,7 +58,6 @@ Main.cpp.o: ..\Main.cpp \
  C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\variants\nodemcu/pins_arduino.h \
  C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\variants\nodemcu/../generic/common.h \
  C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\cores\esp8266/HardwareSerial.h \
- C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\cores\esp8266/main.h \
  ..\Utilities/Utilities.h \
  C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\cores\esp8266/arduino.h \
  ..\Executive/Executive.h
@@ -180,8 +179,6 @@ C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\variants\nodemc
 C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\variants\nodemcu/../generic/common.h:
 
 C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\cores\esp8266/HardwareSerial.h:
-
-C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\cores\esp8266/main.h:
 
 ..\Utilities/Utilities.h:
 

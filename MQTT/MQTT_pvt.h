@@ -54,6 +54,7 @@ const char* mqttPassword = "mqtt_pw1";
 static const MQTTOutput_structType mqttOutputInit =
 {
 	NO_CHANGE,           // doorCmd
+	0
 
 };
 /*------------------------------------------------------------------------------

@@ -79,6 +79,8 @@ MQTT\MQTT.cpp.o: ..\MQTT\MQTT.cpp \
  C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\libraries\ESP8266WiFi\src/WiFiClientSecure.h \
  C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\libraries\ESP8266WiFi\src/include/ssl.h \
  C:\eclipse\arduinoPlugin\libraries\PubSubClient\2.6.0\src/PubSubClient.h \
+ ..\MQTT\../Utilities/Utilities.h \
+ C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\cores\esp8266/arduino.h \
  ..\MQTT\MQTT.h ..\MQTT\MQTT_pvt.h
 
 C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\libraries\ESP8266WiFi\src/ESP8266WiFi.h:
@@ -240,6 +242,10 @@ C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\libraries\ESP82
 C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\libraries\ESP8266WiFi\src/include/ssl.h:
 
 C:\eclipse\arduinoPlugin\libraries\PubSubClient\2.6.0\src/PubSubClient.h:
+
+..\MQTT\../Utilities/Utilities.h:
+
+C:\eclipse\arduinoPlugin\packages\esp8266\hardware\esp8266\2.4.1\cores\esp8266/arduino.h:
 
 ..\MQTT\MQTT.h:
 

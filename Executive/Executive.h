@@ -28,8 +28,12 @@
 --|
 ------------------------------------------------------------------------------*/
 
-/* None */
+typedef struct
+{
+	unsigned lastFrameTimeMS;
+	unsigned worstCaseFrameTimeMS;
 
+}ExecOutput_structType;
 /*------------------------------------------------------------------------------
 --|
 --| Constants
@@ -52,7 +56,9 @@ extern "C"
 {
 #endif
 extern void ExecInit(void);
-extern void ExecScheduler(unsigned overFlowingFrameCounter);
+extern void ManageExec(unsigned overFlowingFrameCounter);
+extern void GetExecData(ExecOutput_structType *output);
+
 
 #if defined (__cplusplus)
 }

@@ -26,13 +26,49 @@
  --| Private Function Bodies
  --|
  ------------------------------------------------------------------------------*/
+// Will roll over in 136 years. I probably wont mind at that point.
+#define SECONDS_PER_DAY (24 * 60 * 60)
+#define SECONDS_PER_HOUR (60 * 60)
+#define SECONDS_PER_MIN 60
+static void getUpTime(uptime_structType *upTime)
+{
+	static unsigned long lastMillis = 0;
+	static unsigned rollover = 0;
 
+	unsigned long currentMillis = millis();
+
+	if (currentMillis < lastMillis)
+		rollover++;
+
+	unsigned seconds = currentMillis/1000 + (rollover * ULONG_MAX/1000);
+
+	lastMillis = currentMillis;
+
+	upTime->days = seconds / SECONDS_PER_DAY;
+
+	upTime->hours = (seconds
+			- upTime->days * SECONDS_PER_DAY)
+						   / SECONDS_PER_HOUR;
+
+	upTime->minutes = (seconds
+			- upTime->days * SECONDS_PER_DAY
+			- upTime->hours * SECONDS_PER_HOUR)
+						   / SECONDS_PER_MIN;
+
+	upTime->seconds = (seconds
+			- upTime->days * SECONDS_PER_DAY
+			- upTime->hours * SECONDS_PER_HOUR
+			- upTime->minutes * SECONDS_PER_MIN);
+
+	return;
+
+}
 static void processSensor()
 {
 	// Let's inspect our garage door sensor module
 
 	// Sensor module's thoughts about its environment
-	switch (sysManagerInputData.garageDoorData.sensorState)
+	switch (sysMgrInputData.garageDoorData.sensorState)
 	{
 	case SENSOR_INIT_0:
 		SetStatus(BAD);
@@ -53,11 +89,11 @@ static void processSensor()
 	}
 
 	// Sensor module's thoughts about the garage door status
-	switch (sysManagerInputData.garageDoorData.doorState)
+	switch (sysMgrInputData.garageDoorData.doorState)
 	{
 	case UNKNOWN:
 		// If sensor is operational AND doesn't know the door state
-		if (sysManagerInputData.garageDoorData.sensorState
+		if (sysMgrInputData.garageDoorData.sensorState
 				== SENSOR_OPERATIONAL)
 		{
 			// We have a problem.
@@ -108,14 +144,14 @@ static void handleDoorCmd()
 	{
 		bool actuate = false;
 		// The door can be opened if it is closed
-		if ((sysManagerInputData.mqttData.doorCmd == OPEN)
-				&& (sysManagerInputData.garageDoorData.doorState == CLOSED))
+		if ((sysMgrInputData.mqttData.doorCmd == OPEN)
+				&& (sysMgrInputData.garageDoorData.doorState == CLOSED))
 		{
 			actuate = true;
 		}
 		// The door can be closed if it is open
-		if ((sysManagerInputData.mqttData.doorCmd == CLOSE)
-				&& (sysManagerInputData.garageDoorData.doorState == OPENED))
+		if ((sysMgrInputData.mqttData.doorCmd == CLOSE)
+				&& (sysMgrInputData.garageDoorData.doorState == OPENED))
 		{
 			actuate = true;
 		}
@@ -186,9 +222,9 @@ static void publishDoorStateData()
 	msg.str = generalBuffer;
 
 	// Extracted for readability
-	doorState_enumType doorState = sysManagerInputData.garageDoorData.doorState;
+	doorState_enumType doorState = sysMgrInputData.garageDoorData.doorState;
 	sensorState_enumType sensorState =
-			sysManagerInputData.garageDoorData.sensorState;
+			sysMgrInputData.garageDoorData.sensorState;
 
 	snprintf(generalBuffer, NELEMS(generalBuffer), "Door:%s State:%s",
 			doorStateTable[doorState], sensorStateTable[sensorState]);
@@ -197,6 +233,7 @@ static void publishDoorStateData()
 
 	return;
 }
+// This function is used to report debug info about the system
 static void publishDebugData()
 {
 	char generalBuffer[100];
@@ -206,13 +243,28 @@ static void publishDebugData()
 	msg.str = generalBuffer;
 
 	// Extracted for readability
-	unsigned long open = sysManagerInputData.garageDoorData.openedDistanceInCM;
-	unsigned long closed = sysManagerInputData.garageDoorData.closedDistanceInCM;
-	unsigned long current =
-			sysManagerInputData.garageDoorData.currentDistanceInCM;
+	unsigned long open = sysMgrInputData.garageDoorData.openedDistanceInCM;
+	unsigned long closed = sysMgrInputData.garageDoorData.closedDistanceInCM;
+	unsigned long current = sysMgrInputData.garageDoorData.currentDistanceInCM;
+	unsigned mqttReconnects = sysMgrInputData.mqttData.numReconnects;
+	unsigned worstCaseFrameTime = sysMgrInputData.execData.worstCaseFrameTimeMS;
+
+	// Get system uptime
+	uptime_structType upTime;
+	getUpTime(&upTime);
 
 	snprintf(generalBuffer, NELEMS(generalBuffer),
-			"Open:%lu Close:%lu Current:%lu", open, closed, current);
+			"Open:%lu " // Open door dist
+			"Close:%lu " // Close door dist
+			"Current:%lu " // Current door dist
+			"Days:%u " // Up time in days
+			"Hours:%u " // Up time in hours
+			"Mins:%u " // Up time in minutes
+			"Secs:%u " // Up time in seconds
+			"Reconnects:%u " // Number of MQTT reconnects
+			"WCF:%u ", // Worst case frame time
+			open, closed, current, upTime.days, upTime.hours, upTime.minutes,
+			upTime.seconds, mqttReconnects, worstCaseFrameTime);
 
 	SendMQTTMsg(msg);
 
@@ -223,9 +275,10 @@ static void publishDebugData()
 // that will handle that.
 static void handleMQTTOutputData()
 {
+	// Let Raspberry PI know about the door state
 	publishDoorStateData();
+	// Let Raspberry PI know about the system state
 	publishDebugData();
-	// publishGeneralData(); // todo:up-time?
 	return;
 
 }
@@ -241,9 +294,9 @@ static void processMQTT()
 static void getInputData()
 {
 
-	MQTTGetData(&sysManagerInputData.mqttData);
-	GarageSensorGetData(&sysManagerInputData.garageDoorData);
-
+	GetMQTTData(&sysMgrInputData.mqttData);
+	GetGarageSensorData(&sysMgrInputData.garageDoorData);
+	GetExecData(&sysMgrInputData.execData);
 	return;
 
 }

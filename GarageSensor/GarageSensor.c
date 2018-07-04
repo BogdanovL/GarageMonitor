@@ -71,7 +71,6 @@ static void manageOutputData(unsigned long distance)
 	case SENSOR_INIT_0 :
 		distance1 = garageSensorOut.currentDistanceInCM;
 		garageSensorOut.sensorState = SENSOR_INIT_1;
-		printf("State 1\r\n");
 		break;
 
 	// This is getting interesting. We now have two stable distances.
@@ -105,24 +104,26 @@ static void manageOutputData(unsigned long distance)
 		break;
 	default :
 		// Added a default case to keep compiler warning from popping up
+		// Should never ever get called (maybe due to SEU)
 		FatalFault(true);
 		break;
 
 	// While operational, all we do is compare current distance to known limits
 	case SENSOR_OPERATIONAL :
+		// If closed
 		if (WITHIN_TOLERANCE(garageSensorOut.currentDistanceInCM,
 				garageSensorOut.closedDistanceInCM))
 		{
 			garageSensorOut.doorState = CLOSED;
 
 		}
-
+		// If open
 		else if (WITHIN_TOLERANCE(garageSensorOut.currentDistanceInCM,
 				garageSensorOut.openedDistanceInCM))
 		{
 			garageSensorOut.doorState = OPENED;
 		}
-
+		// If neither
 		else
 		{
 			// What happened?!
@@ -143,7 +144,7 @@ static void manageOutputData(unsigned long distance)
 ------------------------------------------------------------------------------*/
 
 //------------------------------------INIT------------------------------------
-extern void InitGarageState()
+extern void InitGarageSensor()
 {
 	// Set up our hardware
 	pinMode(TRIGGER, OUTPUT);
@@ -240,7 +241,7 @@ extern void ManageGarageSensor()
 
 }
 //------------------------------------API------------------------------------
-extern void GarageSensorGetData(GarageSensorOutput_structType *output)
+extern void GetGarageSensorData(GarageSensorOutput_structType *output)
 {
 	*output = garageSensorOut;
 }

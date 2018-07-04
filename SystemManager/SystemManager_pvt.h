@@ -17,6 +17,9 @@
 --| Includes
 --|
 ------------------------------------------------------------------------------*/
+#include "../Executive/Executive.h"
+#include "../GarageSensor/GarageSensor.h"
+#include "../MQTT/MQTT.h"
 
 /*------------------------------------------------------------------------------
 --|
@@ -36,7 +39,16 @@ typedef struct
 {
 	GarageSensorOutput_structType garageDoorData;
 	MQTTOutput_structType mqttData;
+	ExecOutput_structType execData;
 } systemManagerInputData_structType;
+
+typedef struct
+{
+	unsigned days;
+	unsigned hours;
+	unsigned minutes;
+	unsigned seconds;
+} uptime_structType;
 
 /*------------------------------------------------------------------------------
 --|
@@ -50,7 +62,7 @@ typedef struct
 --|
 ------------------------------------------------------------------------------*/
 // Data this module needs to make decisions
-static systemManagerInputData_structType sysManagerInputData;
+static systemManagerInputData_structType sysMgrInputData;
 
 /*------------------------------------------------------------------------------
 --|

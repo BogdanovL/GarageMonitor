@@ -17,14 +17,11 @@
 // with a server that supports MQTT
 #include <PubSubClient.h>
 
+// Used for latching a fatal fault i fwe can't connect to MQTT
+#include "../Utilities/Utilities.h"
 #include "MQTT.h"
 #include "MQTT_pvt.h"
 
-/*-----------------------------------------------------------------------------
---|
---| Private Data
---|
------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------
 --|
@@ -40,11 +37,37 @@ static void callback(const char topic[], unsigned char* payload, unsigned int le
 	else if (msg.compare("close") == 0)
 		mqttOut.doorCmd = CLOSE;
 
-	printf("Got something...\r\n");
 	return;
 
 }
 
+// This wrapper tries to connect to our MQTT server a few times. If not
+// successful, latches a fatal fault and kills the unit. Should be called
+// Only after wifi, callbacks, and sever have been configured
+static void mqttConnect()
+{
+	// How long to wait between reconnect attempts
+	const unsigned RECONNECT_DELAY_SEC  = 2;
+	// Two minutes worth of attempts (enough for any server reboot situation)
+	const unsigned RETRY_MAX = 120 / RECONNECT_DELAY_SEC;
+
+	unsigned totalRetries = 0;
+	while (client.connect(mqttID, mqttUser, mqttPassword) != true)
+	{
+
+		if (totalRetries++ == RETRY_MAX)
+			// Welp, that didn't work. Wait for human intervention.
+			FatalFault(false);
+
+		// Wait before retrying
+		delay(RECONNECT_DELAY_SEC * 1000);
+	}
+
+	// Register for the topics we're interested in
+	client.subscribe(SUB_GARAGE_CMD);
+
+	return;
+}
 /*------------------------------------------------------------------------------
 --|
 --| Public Function Bodies
@@ -65,7 +88,7 @@ extern void InitMQTTCom()
 	while (WiFi.status() != WL_CONNECTED)
 	{
 		delay(100);
-		printf("Connecting to WiFi..");
+		printf("Connecting to WiFi..\n");
 	}
 
 	// Specify the address and the port of the MQTT server.
@@ -74,12 +97,9 @@ extern void InitMQTTCom()
 	// Register our callback function
 	client.setCallback(callback);
 
-	// Connect to our raspberry pi MQTT server
-	client.connect(mqttID, mqttUser, mqttPassword);
-			while (!client.connected());
-
-	// Register for the topics we're interested in
-	client.subscribe(SUB_GARAGE_CMD);
+	// Connect to our raspberry pi MQTT server and register for the topics
+	// we're interested in
+	mqttConnect();
 
 	// Say hello
 	std::string msg = "Hello from Garage Sensor: ";
@@ -90,13 +110,17 @@ extern void InitMQTTCom()
 	return;
 
 }
+
+
 // Must be called every frame
 extern void ManageMQTTCom()
 {
+
 	// If disconnected, reconnect
-	if (!client.connected()) {
-		printf("Reconnecting...\r\n");
-		client.connect(mqttID, mqttUser, mqttPassword);
+	if (!client.connected())
+	{
+		mqttConnect();
+		mqttOut.numReconnects++;
 	}
 	// Process incoming messages, and maintain connection to our Raspberry Pi
 	// MQTT broker server
@@ -112,7 +136,7 @@ extern void SendMQTTMsg(mqttMsgType_StructType msg)
 
 }
 //------------------------------------API------------------------------------
-extern void MQTTGetData(MQTTOutput_structType *output)
+extern void GetMQTTData(MQTTOutput_structType *output)
 {
 	*output = mqttOut;
 

@@ -27,6 +27,7 @@
 --| Defines
 --|
 ------------------------------------------------------------------------------*/
+#define HEARTBEAT_LED D2
 
 
 /*------------------------------------------------------------------------------
@@ -56,7 +57,7 @@ typedef struct {
 static const manageFunct ExecInitTable [] =
 {
 		InitSystemManager,
-		InitGarageState,
+		InitGarageSensor,
 		InitMQTTCom,
 };
 
@@ -75,14 +76,20 @@ static const foregroundFunct_StructType ExecFrameTable [] =
 };
 
 
+/*-----Exec's Output Init-----*/
+
+static const ExecOutput_structType execOutputInit =
+{
+	0,
+	0
+};
 /*------------------------------------------------------------------------------
 --|
 --| Private Data
 --|
 ------------------------------------------------------------------------------*/
 
-/* None */
-
+static ExecOutput_structType execOut;
 /*------------------------------------------------------------------------------
 --|
 --| Function Specifications
