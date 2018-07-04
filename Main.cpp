@@ -4,9 +4,9 @@
 #include "Utilities/Utilities.h"
 #include "Executive/Executive.h"
 
-
 // Arduino setup entry point
-extern void setup() {
+extern void setup()
+{
 	// Used for debug
 	Serial.begin(9600);
 	Serial.setDebugOutput(true);
@@ -19,9 +19,9 @@ extern void setup() {
 // Arduino loop entry point
 extern void loop()
 {
-	/* --- Start Foreground Frame ---*/
+	// Exec handles execution. Expects to be called forever with no delay.
+	// Function duration will be MS_PER_FRAME (but overruns are possible)
 	ManageExec();
-	/* --- End Foreground Frame ---*/
 
 	return;
 

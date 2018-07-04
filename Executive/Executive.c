@@ -77,6 +77,8 @@ extern void ManageExec()
 	// Blink an LED so we know we're alive
 	manageHeartBeat(overFlowingFrameCounter);
 
+	// Run all of our tasks
+
 	// Note: The overhead of division here is low. The alternative would be
 	// to do it at compile time (or have an interrupt driven scheme) but this
 	// was not worth the tradeoff of added complexity / diminished readability
@@ -93,9 +95,9 @@ extern void ManageExec()
 	/*-----------End Foreground Frame-----------*/
 
 	// Calculate stats about foreground execution
-	// Current frame time
+	// (1) Current frame time
 	execOut.lastFrameTimeMS = foregroundDuration;
-	// Keep Track of Max
+	// (2) Keep Track of Max
 	if (execOut.lastFrameTimeMS > execOut.worstCaseFrameTimeMS)
 	{
 		execOut.worstCaseFrameTimeMS = execOut.lastFrameTimeMS;
