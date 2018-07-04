@@ -19,6 +19,7 @@
  --| Private Data
  --|
  -----------------------------------------------------------------------------*/
+
 /* None */
 
 /*------------------------------------------------------------------------------
@@ -63,9 +64,9 @@ static void getUpTime(uptime_structType *upTime)
 	return;
 
 }
+// Function called to inspect the data from our garage door sensor module
 static void processSensor()
 {
-	// Let's inspect our garage door sensor module
 
 	// Sensor module's thoughts about its environment
 	switch (sysMgrInputData.garageDoorData.sensorState)
@@ -120,7 +121,6 @@ static void processSensor()
 #define GARAGE_CLOSE_TIME_MS REMOTE_ASSERT_TIME_MS + 10000
 // Min amount of time to assert the garage door remote button from cmd receipt
 #define REMOTE_ASSERT_TIME_MS 500
-
 static void handleDoorCmd()
 {
 	// Implemented as state machine to allow for deterministic function duration
@@ -197,12 +197,10 @@ static void handleDoorCmd()
 static void handleMQTTInputData()
 {
 	handleDoorCmd();
-	//TODO: handleQueryCmd();
-	//TODO: handleSystemCmd();
-	//etc.
+	// Could support other commands here
 	return;
 }
-
+// This function is used to report door and system state info
 static void publishDoorStateData()
 {
 	const char* doorStateTable[doorState_enumTypeSize];
