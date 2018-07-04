@@ -27,14 +27,13 @@ static void manageHeartBeat(unsigned frameCount)
 {
 	static const unsigned HEART_BEAT_RATE_MS = 500;
 	static bool ledCmd = false;
-	if (frameCount > 0)
+
+	if (frameCount % (HEART_BEAT_RATE_MS / MS_PER_FRAME) == 0)
 	{
-		if (frameCount % (HEART_BEAT_RATE_MS / MS_PER_FRAME) == 0)
-		{
-			digitalWrite(HEARTBEAT_LED, ledCmd);
-			ledCmd = !ledCmd;
-		}
+		digitalWrite(HEARTBEAT_LED, ledCmd);
+		ledCmd = !ledCmd;
 	}
+
 	return;
 }
 
@@ -64,7 +63,10 @@ extern void ManageExec()
 {
 	// Count frames away. Basic unit of measurement.
 	static unsigned overFlowingFrameCounter = 0;
-	overFlowingFrameCounter++;
+			overFlowingFrameCounter++;
+	// If overflowed skip the value of zero
+	if (overFlowingFrameCounter == 0)
+		overFlowingFrameCounter++;
 
 	unsigned delayTimeTillNextFrame;
 
@@ -91,8 +93,8 @@ extern void ManageExec()
 			ExecFrameTable[i].functPtr();
 	}
 
-	// Let's see how long that took (don't forget about overflow)
-	foregroundDuration = abs(millis() - foregroundDuration);
+	// Let's see how long that took (overflow safe)
+	foregroundDuration = millis() - foregroundDuration;
 
 	/*-----------End Foreground Frame-----------*/
 
