@@ -56,7 +56,7 @@ extern "C"
 {
 #endif
 extern void ExecInit(void);
-extern void ManageExec(unsigned overFlowingFrameCounter);
+extern void ManageExec(void);
 extern void GetExecData(ExecOutput_structType *output);
 
 

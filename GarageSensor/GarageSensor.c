@@ -183,7 +183,6 @@ extern void ManageGarageSensor()
 	static unsigned long avgSamplesCount=0;
 	// Counter for how many stable distance samples we have gotten
 	static unsigned long stableSamplesCount=0;
-
 	// Stable distance we've calculated (known after multiple frames)
 	static unsigned long stableDistance = 0;
 	// Current distance we've calculated (known within 1 frame)
@@ -240,7 +239,6 @@ extern void ManageGarageSensor()
 	return;
 
 }
-//------------------------------------API------------------------------------
 extern void GetGarageSensorData(GarageSensorOutput_structType *output)
 {
 	*output = garageSensorOut;

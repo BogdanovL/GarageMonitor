@@ -57,11 +57,19 @@ extern void ExecInit(void) {
 }
 
 
-// Must be called every software frame
-extern void ManageExec(unsigned overFlowingFrameCounter)
+// Must be called in an infinite loop with no delay
+extern void ManageExec()
 {
+	// Count frames away. Basic unit of measurement.
+	static unsigned overFlowingFrameCounter = 0;
+	overFlowingFrameCounter++;
+
+	unsigned delayTimeTillNextFrame;
+
 	// Used to measure our foreground frame duration in MS
 	unsigned long foregroundDuration;
+
+	/*-----------Foreground Frame-----------*/
 
 	// Get current time in milliseconds
 	foregroundDuration = millis();
@@ -82,13 +90,35 @@ extern void ManageExec(unsigned overFlowingFrameCounter)
 	// Let's see how long that took (don't forget about overflow)
 	foregroundDuration = abs(millis() - foregroundDuration);
 
-	execOut.lastFrameTimeMS = foregroundDuration;
+	/*-----------End Foreground Frame-----------*/
 
+	// Calculate stats about foreground execution
+	// Current frame time
+	execOut.lastFrameTimeMS = foregroundDuration;
 	// Keep Track of Max
 	if (execOut.lastFrameTimeMS > execOut.worstCaseFrameTimeMS)
 	{
 		execOut.worstCaseFrameTimeMS = execOut.lastFrameTimeMS;
 	}
+
+	// Calculate new delay time
+	delayTimeTillNextFrame = MS_PER_FRAME - execOut.lastFrameTimeMS;
+
+	// If we over-ran
+	if (execOut.lastFrameTimeMS > MS_PER_FRAME)
+	{
+		// We could fault here, but MQTT libraries are non deterministic
+		// and I did not feel like re-writing them. No real 'real time'
+		// requirements here, so let's just move on with our lives
+
+		// We'll accept the overrun and restart the frame ASAP
+		delayTimeTillNextFrame = 0;
+
+	}
+
+	// Mostly start tasks every MS_PER_FRAME
+	delay(delayTimeTillNextFrame);
+
 	return;
 
 }
