@@ -20,9 +20,9 @@ extern void loop()
 {
 	// Count frames away. Basic unit of measurement.
 	static unsigned overFlowingFrameCounter = 0;
+	overFlowingFrameCounter++;
 
 	unsigned delayTimeTillNextFrame;
-	overFlowingFrameCounter++;
 
 	/* --- Start Foreground Frame ---*/
 	ManageExec(overFlowingFrameCounter);
