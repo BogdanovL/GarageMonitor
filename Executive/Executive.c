@@ -26,12 +26,11 @@
 static void manageHeartBeat(unsigned frameCount)
 {
 	static const unsigned HEART_BEAT_RATE_MS = 500;
-	static bool ledIsOn = false;
+	static bool ledCmd = false;
 	if ((frameCount * MS_PER_FRAME) % HEART_BEAT_RATE_MS == 0)
 	{
-		// Shortcut here eliminates another variable at function call expense
-		digitalWrite(HEARTBEAT_LED, ledIsOn);
-		ledIsOn = !ledIsOn;
+		digitalWrite(HEARTBEAT_LED, ledCmd);
+		ledCmd = !ledCmd;
 	}
 	return;
 }
