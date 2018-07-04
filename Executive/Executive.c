@@ -28,6 +28,7 @@ static void manageHeartBeat(unsigned frameCount)
 	static const unsigned HEART_BEAT_RATE_MS = 500;
 	static bool ledCmd = false;
 
+	// During overflow to zero this will blink twice
 	if (frameCount % (HEART_BEAT_RATE_MS / MS_PER_FRAME) == 0)
 	{
 		digitalWrite(HEARTBEAT_LED, ledCmd);
