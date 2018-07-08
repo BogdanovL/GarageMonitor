@@ -172,7 +172,8 @@ static void handleDoorCmd()
 		// All incoming actuation commands from MQTT will simply be ignored.
 	case ASSERTING_GARAGE_SIGNAL:
 		// If time is up
-		if ((unsigned long)(currentTime - timeAtActuation) >= REMOTE_ASSERT_TIME_MS)
+		if ((unsigned long) (currentTime - timeAtActuation)
+				>= REMOTE_ASSERT_TIME_MS)
 		{
 			// Terminate actuation of remote signal
 			digitalWrite(GARAGE_DOOR_ACTUATOR, LOW);
@@ -185,7 +186,8 @@ static void handleDoorCmd()
 		// All incoming actuation commands from MQTT will simply be ignored.
 	case WAITING_FOR_DOOR:
 		// If time is up, go back to processing commands
-		if ((unsigned long)(currentTime - timeAtActuation) >= GARAGE_CLOSE_TIME_MS)
+		if ((unsigned long) (currentTime - timeAtActuation)
+				>= GARAGE_CLOSE_TIME_MS)
 		{
 			doorHandlerState = READY_FOR_COMMAND;
 		}
