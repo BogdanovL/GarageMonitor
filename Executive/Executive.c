@@ -65,9 +65,6 @@ extern void ManageExec()
 	// Count frames away. Basic unit of measurement.
 	static unsigned overFlowingFrameCounter = 0;
 			overFlowingFrameCounter++;
-	// If overflowed skip the value of zero
-	if (overFlowingFrameCounter == 0)
-		overFlowingFrameCounter++;
 
 	unsigned delayTimeTillNextFrame;
 
@@ -89,6 +86,9 @@ extern void ManageExec()
 	// was not worth the tradeoff of added complexity / diminished readability
 	for (unsigned i = 0; i < NELEMS(ExecFrameTable); i++)
 	{
+		// In 13.6 years of run-time overflowing framecounter will become zero
+		// and all functions will be called regardless of their rate. This is
+		// deemed acceptable for simplicity.
 		if (overFlowingFrameCounter
 				% (ExecFrameTable[i].rateCalledInMS / MS_PER_FRAME) == 0)
 			ExecFrameTable[i].functPtr();
