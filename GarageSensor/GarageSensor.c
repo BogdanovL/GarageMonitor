@@ -64,17 +64,17 @@ static void manageOutputData(unsigned long distance)
 	// We trust the reading from caller
 	garageSensorOut.currentDistanceInCM = distance;
 
-	switch(garageSensorOut.sensorState)
+	switch (garageSensorOut.sensorState)
 	{
 
 	// Our first real stable distance. Record it.
-	case SENSOR_INIT_0 :
+	case SENSOR_INIT_0:
 		distance1 = garageSensorOut.currentDistanceInCM;
 		garageSensorOut.sensorState = SENSOR_INIT_1;
 		break;
 
-	// This is getting interesting. We now have two stable distances.
-	case SENSOR_INIT_1 :
+		// This is getting interesting. We now have two stable distances.
+	case SENSOR_INIT_1:
 
 		distance2 = garageSensorOut.currentDistanceInCM;
 
@@ -102,14 +102,9 @@ static void manageOutputData(unsigned long distance)
 			garageSensorOut.sensorState = SENSOR_OPERATIONAL;
 		}
 		break;
-	default :
-		// Added a default case to keep compiler warning from popping up
-		// Should never ever get called (maybe due to SEU)
-		FatalFault(true);
-		break;
 
-	// While operational, all we do is compare current distance to known limits
-	case SENSOR_OPERATIONAL :
+		// While operational, all we do is compare current distance to known limits
+	case SENSOR_OPERATIONAL:
 		// If closed
 		if (WITHIN_TOLERANCE(garageSensorOut.currentDistanceInCM,
 				garageSensorOut.closedDistanceInCM))
@@ -131,6 +126,12 @@ static void manageOutputData(unsigned long distance)
 			garageSensorOut.doorState = UNKNOWN;
 		}
 
+		break;
+
+	default:
+		// Added a default case to keep compiler warning from popping up
+		// Should never ever get called (maybe due to SEU)
+		FatalFault(true);
 		break;
 
 	}
