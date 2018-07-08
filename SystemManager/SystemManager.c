@@ -311,11 +311,16 @@ extern void InitSystemManager()
 
 	// Pin for garage door actuator (hacked remote)
 	pinMode(GARAGE_DOOR_ACTUATOR, OUTPUT);
+
+	// The two "state" LEDs
 	pinMode(STATE1_LED, OUTPUT);
 	pinMode(SYS_CALIBRATED_LED, OUTPUT);
+
+	// The two wired up colors of the one system health LED
 	pinMode(RED_LED, OUTPUT);
 	pinMode(GREEN_LED, OUTPUT);
 
+	// Initialize all to logic-low
 	digitalWrite(GARAGE_DOOR_ACTUATOR, LOW);
 	digitalWrite(STATE1_LED, LOW);
 	digitalWrite(SYS_CALIBRATED_LED, LOW);
