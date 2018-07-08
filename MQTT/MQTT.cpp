@@ -20,7 +20,7 @@
 #include "MQTT.h"
 #include "MQTT_pvt.h"
 
-// Used for latching a fatal fault i fwe can't connect to MQTT
+// Used for latching a fatal fault if we can't connect to MQTT
 #include "Utilities.h"
 
 /*------------------------------------------------------------------------------
