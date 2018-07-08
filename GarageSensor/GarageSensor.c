@@ -50,7 +50,7 @@ static unsigned long garageSensorPingTarget() {
 	duration = pulseIn(ECHO, HIGH, US_TIMEOUT_CAP);
 
 	// Calculating the distance
-	// TODO: define these agic numbers. Sometihng about speed of sound...
+	// TODO: define these magic numbers. Something about speed of sound...
 	distance = duration * 0.034 / 2;
 
 	return distance;
