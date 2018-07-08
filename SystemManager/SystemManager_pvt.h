@@ -17,9 +17,9 @@
 --| Includes
 --|
 ------------------------------------------------------------------------------*/
-#include "../Executive/Executive.h"
-#include "../GarageSensor/GarageSensor.h"
-#include "../MQTT/MQTT.h"
+#include "Executive.h"
+#include "GarageSensor.h"
+#include "MQTT.h"
 
 /*------------------------------------------------------------------------------
 --|

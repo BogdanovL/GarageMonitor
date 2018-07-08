@@ -14,9 +14,9 @@
 #include "Arduino.h"
 #include "GarageSensor_pvt.h"
 
-#include "../Utilities/Utilities.h"
+#include "Utilities.h"
 // Exec has our frame time which we need to know to calculate # samples
-#include "../Executive/Executive.h"
+#include "Executive.h"
 
 /*-----------------------------------------------------------------------------
 --|

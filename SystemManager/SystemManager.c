@@ -10,10 +10,11 @@
  --| Includes
  --|
  -----------------------------------------------------------------------------*/
-#include "../Utilities/Utilities.h"
-#include "../GarageSensor/GarageSensor.h"
-#include "../MQTT/MQTT.h"
-#include "../SystemManager/SystemManager_pvt.h"
+#include "Utilities.h"
+#include "GarageSensor.h"
+#include "MQTT.h"
+
+#include "SystemManager_pvt.h"
 /*-----------------------------------------------------------------------------
  --|
  --| Private Data

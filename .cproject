@@ -3,7 +3,9 @@
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="io.sloeber.core.toolChain.release.1082180521">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="io.sloeber.core.toolChain.release.1082180521" moduleId="org.eclipse.cdt.core.settings" name="Release">
-				<externalSettings/>
+				<externalSettings>
+					<externalSetting/>
+				</externalSettings>
 				<extensions>
 					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
@@ -25,6 +27,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/libraries/ESP8266WiFi/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/libraries/PubSubClient}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/libraries/PubSubClient/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/Utilities}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.cpp.sketch.input.1954912204" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
 							</tool>
@@ -36,6 +39,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/libraries/ESP8266WiFi/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/libraries/PubSubClient}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/libraries/PubSubClient/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/Executive}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/GarageSensor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/MQTT}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/SystemManager}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/Utilities}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.c.sketch.input.282261086" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
 							</tool>
@@ -47,6 +55,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/libraries/ESP8266WiFi/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/libraries/PubSubClient}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/libraries/PubSubClient/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/Executive}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/GarageSensor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/MQTT}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/SystemManager}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/GarageMonitor/Utilities}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.S.sketch.input.811605413" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
 							</tool>

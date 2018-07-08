@@ -18,9 +18,9 @@
 --|
 ------------------------------------------------------------------------------*/
 // All submodules
-#include "../SystemManager/SystemManager.h"
-#include "../GarageSensor/GarageSensor.h"
-#include "../MQTT/MQTT.h"
+#include "SystemManager.h"
+#include "GarageSensor.h"
+#include "MQTT.h"
 
 /*------------------------------------------------------------------------------
 --|

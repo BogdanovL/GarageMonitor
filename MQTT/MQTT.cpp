@@ -17,11 +17,11 @@
 // with a server that supports MQTT
 #include <PubSubClient.h>
 
-// Used for latching a fatal fault i fwe can't connect to MQTT
-#include "../Utilities/Utilities.h"
 #include "MQTT.h"
 #include "MQTT_pvt.h"
 
+// Used for latching a fatal fault i fwe can't connect to MQTT
+#include "Utilities.h"
 
 /*------------------------------------------------------------------------------
 --|
