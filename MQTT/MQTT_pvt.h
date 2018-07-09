@@ -39,15 +39,15 @@
 ------------------------------------------------------------------------------*/
 /*------WiFi Credentials----*/
 // TODO make this dynamically determined
-const char* ssid = "ThreeARR";
-const char* password =  "dr@cula2";
+const char* ssid = /* Wifi netork name goes here*/;
+const char* password =  /*WIFI network goes here*/;
 
 /*------MQTT Server Credentials----*/
-const char* mqttServer = "192.168.0.119"; //todo: make this static
+const char* mqttServer = /*Rasp PI IP goes here */;
 const int mqttPort = 1883;
 const char* mqttID = "ESP8266";
 const char* mqttUser = "ESP8266_1";
-const char* mqttPassword = "mqtt_pw1";
+const char* mqttPassword = /*MQTT PW Goes here*/;
 
 /*-----Module's Output Init-----*/
 
