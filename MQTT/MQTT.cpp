@@ -135,7 +135,6 @@ extern void SendMQTTMsg(mqttMsgType_StructType msg)
 	return;
 
 }
-//------------------------------------API------------------------------------
 extern void GetMQTTData(MQTTOutput_structType *output)
 {
 	*output = mqttOut;
