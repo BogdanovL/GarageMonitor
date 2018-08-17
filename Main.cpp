@@ -1,8 +1,8 @@
 #include "Arduino.h"
 #include "HardwareSerial.h"
 
-#include "Utilities/Utilities.h"
-#include "Executive/Executive.h"
+#include "Utilities.h"
+#include "Executive.h"
 
 // Arduino setup entry point
 extern void setup()
