@@ -94,7 +94,7 @@ static void processSensor()
 	switch (sysMgrInputData.garageDoorData.doorState)
 	{
 	case UNKNOWN:
-		// If sensor is operational AND doesn't know the door state
+		// If sensor is operational AND doesn't know the door status
 		if (sysMgrInputData.garageDoorData.sensorState
 				== SENSOR_OPERATIONAL)
 		{
