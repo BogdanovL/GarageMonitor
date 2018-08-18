@@ -25,6 +25,7 @@
 --|
 ------------------------------------------------------------------------------*/
 
+/* None */
 
 /*------------------------------------------------------------------------------
 --|
@@ -32,37 +33,40 @@
 --|
 ------------------------------------------------------------------------------*/
 
+/* None */
+
 /*------------------------------------------------------------------------------
 --|
 --| Constants
 --|
 ------------------------------------------------------------------------------*/
+
 /*------WiFi Credentials----*/
 // TODO make this dynamically determined
-const char* ssid = /* Wifi netork name goes here*/;
-const char* password =  /*WIFI network goes here*/;
+const char* ssid = "mynetworkname";/* Wifi network name goes here*/
+const char* password =  "mynetworkpw";/*WIFI network goes here*/
 
 /*------MQTT Server Credentials----*/
-const char* mqttServer = /*Rasp PI IP goes here */;
+const char* mqttServer = "10.10.10.10"; /*Rasp PI IP goes here */
 const int mqttPort = 1883;
 const char* mqttID = "ESP8266";
 const char* mqttUser = "ESP8266_1";
-const char* mqttPassword = /*MQTT PW Goes here*/;
+const char* mqttPassword = "mqttpw"; /*MQTT PW Goes here*/
 
 /*-----Module's Output Init-----*/
-
 static const MQTTOutput_structType mqttOutputInit =
 {
 	NO_CHANGE,           // doorCmd
 	0
-
 };
+
 /*------------------------------------------------------------------------------
 --|
 --| Private Data
 --|
 ------------------------------------------------------------------------------*/
 
+// Output data for module
 static MQTTOutput_structType mqttOut;
 
 WiFiClient espClient;
@@ -75,6 +79,8 @@ PubSubClient client(espClient);
 --| Function Specifications
 --|
 ------------------------------------------------------------------------------*/
+
+/* None */
 
 
 #endif /* MQTT_MQTT_PVT_H_ */

@@ -29,6 +29,7 @@
 --| Types
 --|
 ------------------------------------------------------------------------------*/
+
 // Garage door possible states
 typedef enum
 {
@@ -49,7 +50,6 @@ typedef enum
 	SENSOR_OPERATIONAL,
 	sensorState_enumTypeSize
 }sensorState_enumType;
-
 
 // Output data from this module is provided via this type
 typedef struct

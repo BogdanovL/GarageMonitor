@@ -8,12 +8,13 @@
 #ifndef EXECUTIVE_EXECUTIVE_H_
 #define EXECUTIVE_EXECUTIVE_H_
 
-
 /*------------------------------------------------------------------------------
 --|
 --| Includes
 --|
 ------------------------------------------------------------------------------*/
+
+/* None */
 
 /*------------------------------------------------------------------------------
 --|
@@ -22,6 +23,7 @@
 ------------------------------------------------------------------------------*/
 
 #define MS_PER_FRAME 100UL
+
 /*------------------------------------------------------------------------------
 --|
 --| Types
@@ -34,6 +36,7 @@ typedef struct
 	unsigned worstCaseFrameTimeMS;
 
 }ExecOutput_structType;
+
 /*------------------------------------------------------------------------------
 --|
 --| Constants
@@ -55,10 +58,10 @@ typedef struct
 extern "C"
 {
 #endif
+
 extern void ExecInit(void);
 extern void ManageExec(void);
 extern void GetExecData(ExecOutput_structType *output);
-
 
 #if defined (__cplusplus)
 }

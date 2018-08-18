@@ -12,12 +12,15 @@
 --| Includes
 --|
 ------------------------------------------------------------------------------*/
+
 #include "arduino.h"
+
 /*------------------------------------------------------------------------------
 --|
 --| Defines
 --|
 ------------------------------------------------------------------------------*/
+
 // Utilities handles fatal faults, and needs to know these LEDs therefore
 #define RED_LED D3
 #define GREEN_LED D4
@@ -71,13 +74,16 @@ typedef void (*genericFunct)(void);
 --| Function Specifications
 --|
 ------------------------------------------------------------------------------*/
+
 // Name mangling...
 #if defined (__cplusplus)
 extern "C"
 {
 #endif
+
 extern void SetStatus(sysState_enumType status);
 extern void FatalFault(bool alarm);
+
 #if defined (__cplusplus)
 }
 #endif

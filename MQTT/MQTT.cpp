@@ -33,9 +33,13 @@ static void callback(const char topic[], unsigned char* payload, unsigned int le
 	std::string msg = std::string((const char*)payload, length);
 
 	if (msg.compare("open") == 0)
+	{
 		mqttOut.doorCmd = OPEN;
+	}
 	else if (msg.compare("close") == 0)
+	{
 		mqttOut.doorCmd = CLOSE;
+	}
 
 	return;
 
@@ -44,7 +48,7 @@ static void callback(const char topic[], unsigned char* payload, unsigned int le
 // This wrapper tries to connect to our MQTT server a few times. If not
 // successful, latches a fatal fault and kills the unit. Should be called
 // Only after wifi, callbacks, and sever have been configured
-static void mqttConnect()
+static void mqttConnect(void)
 {
 	// How long to wait between reconnect attempts
 	const unsigned RECONNECT_DELAY_SEC  = 2;
@@ -56,9 +60,10 @@ static void mqttConnect()
 	{
 
 		if (totalRetries++ == RETRY_MAX)
+		{
 			// Welp, that didn't work. Wait for human intervention.
 			FatalFault(false);
-
+		}
 		// Wait before retrying
 		delay(RECONNECT_DELAY_SEC * 1000);
 	}
@@ -75,7 +80,7 @@ static void mqttConnect()
 --|
 ------------------------------------------------------------------------------*/
 
-extern void InitMQTTCom()
+extern void InitMQTTCom(void)
 {
 
 	// Set up our output data
@@ -113,7 +118,7 @@ extern void InitMQTTCom()
 
 
 // Must be called every frame
-extern void ManageMQTTCom()
+extern void ManageMQTTCom(void)
 {
 
 	// If disconnected, reconnect

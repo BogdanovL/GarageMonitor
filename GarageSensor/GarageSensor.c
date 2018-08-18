@@ -5,12 +5,12 @@
  *      Author: Lenny
  */
 
-
 /*-----------------------------------------------------------------------------
 --|
 --| Includes
 --|
 -----------------------------------------------------------------------------*/
+
 #include "Arduino.h"
 #include "GarageSensor_pvt.h"
 
@@ -23,6 +23,7 @@
 --| Private Data
 --|
 -----------------------------------------------------------------------------*/
+
 /* None */
 
 /*------------------------------------------------------------------------------
@@ -32,7 +33,7 @@
 ------------------------------------------------------------------------------*/
 // Drive HC-04, wait for sound to echo, calculate distance by delta T
 // Function duration is variable (sound is SLOW!) capped by US_TIMEOUT_CAP
-static unsigned long garageSensorPingTarget() {
+static unsigned long garageSensorPingTarget(void) {
 
 	unsigned long duration;
 	unsigned long distance;
@@ -145,7 +146,7 @@ static void manageOutputData(unsigned long distance)
 ------------------------------------------------------------------------------*/
 
 //------------------------------------INIT------------------------------------
-extern void InitGarageSensor()
+extern void InitGarageSensor(void)
 {
 	// Set up our hardware
 	pinMode(TRIGGER, OUTPUT);
@@ -175,7 +176,7 @@ extern void InitGarageSensor()
 #define SAMPLES_TO_AVERAGE 5
 #define SENSOR_STABLE_MS 3000
 #define NUMBER_SAMPLES SENSOR_STABLE_MS/MS_PER_FRAME
-extern void ManageGarageSensor()
+extern void ManageGarageSensor(void)
 {
 	// Double check that our frame-time makes sense for logic in this function
 	COMPILE_TIME_ASSERT(NUMBER_SAMPLES > 0);
@@ -222,12 +223,10 @@ extern void ManageGarageSensor()
 			// Reset our distance - calculate fresh next time
 			stableDistance = 0;
 		}
-
-
-		//printf("ASC = %lu, Distance = %u, CTD = %u, this many stable samples: %u\r\n", avgSamplesCount,			currentDistance, stableDistance, stableSamplesCount);
-
+#if DEBUG
+		printf("ASC = %lu, Distance = %u, CTD = %u, this many stable samples: %u\r\n", avgSamplesCount,			currentDistance, stableDistance, stableSamplesCount);
+#endif
 	}
-
 	// If we have determined a stable distance, we can do our main processing
 	if (stableSamplesCount == NUMBER_SAMPLES)
 	{
@@ -235,10 +234,7 @@ extern void ManageGarageSensor()
 		stableSamplesCount--;
 		manageOutputData(stableDistance);
 	}
-
-
 	return;
-
 }
 extern void GetGarageSensorData(GarageSensorOutput_structType *output)
 {

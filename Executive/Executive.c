@@ -58,9 +58,8 @@ extern void ExecInit(void) {
 
 }
 
-
 // Must be called in an infinite loop with no delay
-extern void ManageExec()
+extern void ManageExec(void)
 {
 	// Count frames away. Basic unit of measurement.
 	static unsigned overFlowingFrameCounter = 0;
@@ -91,7 +90,9 @@ extern void ManageExec()
 		// deemed acceptable for simplicity.
 		if (overFlowingFrameCounter
 				% (ExecFrameTable[i].rateCalledInMS / MS_PER_FRAME) == 0)
+		{
 			ExecFrameTable[i].functPtr();
+		}
 	}
 
 	// Let's see how long that took (overflow safe)
@@ -129,9 +130,9 @@ extern void ManageExec()
 	return;
 
 }
+
 extern void GetExecData(ExecOutput_structType *output)
 {
 	*output = execOut;
-
 	return;
 }

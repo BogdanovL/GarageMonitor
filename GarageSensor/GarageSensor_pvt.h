@@ -11,18 +11,20 @@
 #ifndef GARAGESENSOR_GARAGESENSOR_PVT_H_
 #define GARAGESENSOR_GARAGESENSOR_PVT_H_
 
-
 /*------------------------------------------------------------------------------
 --|
 --| Includes
 --|
 ------------------------------------------------------------------------------*/
+
 #include "GarageSensor.h"
+
 /*------------------------------------------------------------------------------
 --|
 --| Defines
 --|
 ------------------------------------------------------------------------------*/
+
 // See the sensor documentation (HC-04) for an understanding of these pins.
 #define TRIGGER D0
 #define ECHO D1
@@ -36,19 +38,22 @@
 #define WITHIN_TOLERANCE(a, b) \
 	(a > ( b-SENSOR_TOLERANCE_CM) && \
 			a < (b+SENSOR_TOLERANCE_CM))
+
 /*------------------------------------------------------------------------------
 --|
 --| Types
 --|
 ------------------------------------------------------------------------------*/
 
+/* None */
+
 /*------------------------------------------------------------------------------
 --|
 --| Constants
 --|
 ------------------------------------------------------------------------------*/
-/*-----Module's Output Init-----*/
 
+/*-----Module's Output Init-----*/
 static const GarageSensorOutput_structType GarageSensorOutputInit =
 {
 	SENSOR_INIT_0,      // sensorState
@@ -64,6 +69,7 @@ static const GarageSensorOutput_structType GarageSensorOutputInit =
 --| Private Data
 --|
 ------------------------------------------------------------------------------*/
+
 // Output data for module
 GarageSensorOutput_structType garageSensorOut;
 
@@ -73,5 +79,6 @@ GarageSensorOutput_structType garageSensorOut;
 --|
 ------------------------------------------------------------------------------*/
 
+/* None */
 
 #endif /* GARAGESENSOR_GARAGESENSOR_PVT_H_ */

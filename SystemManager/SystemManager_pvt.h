@@ -11,12 +11,12 @@
 #ifndef STATEMGMT_STATEMANAGER_PVT_H_
 #define STATEMGMT_STATEMANAGER_PVT_H_
 
-
 /*------------------------------------------------------------------------------
 --|
 --| Includes
 --|
 ------------------------------------------------------------------------------*/
+
 #include "Executive.h"
 #include "GarageSensor.h"
 #include "MQTT.h"
@@ -26,9 +26,11 @@
 --| Defines
 --|
 ------------------------------------------------------------------------------*/
+
 #define GARAGE_DOOR_ACTUATOR D7
 #define STATE1_LED D5
 #define SYS_CALIBRATED_LED D6
+
 /*------------------------------------------------------------------------------
 --|
 --| Types
@@ -56,11 +58,14 @@ typedef struct
 --|
 ------------------------------------------------------------------------------*/
 
+/* None */
+
 /*------------------------------------------------------------------------------
 --|
 --| Private Data
 --|
 ------------------------------------------------------------------------------*/
+
 // Data this module needs to make decisions
 static systemManagerInputData_structType sysMgrInputData;
 
@@ -70,7 +75,6 @@ static systemManagerInputData_structType sysMgrInputData;
 --|
 ------------------------------------------------------------------------------*/
 
-
-
+/* None */
 
 #endif /* STATEMGMT_STATEMANAGER_PVT_H_ */

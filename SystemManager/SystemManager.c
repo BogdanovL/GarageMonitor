@@ -28,6 +28,7 @@
  --| Private Function Bodies
  --|
  ------------------------------------------------------------------------------*/
+
 // Will roll over in 136 years. I probably wont mind at that point.
 #define SECONDS_PER_DAY (24 * 60 * 60)
 #define SECONDS_PER_HOUR (60 * 60)
@@ -65,8 +66,9 @@ static void getUpTime(uptime_structType *upTime)
 	return;
 
 }
+
 // Function called to inspect the data from our garage door sensor module
-static void processSensor()
+static void processSensor(void)
 {
 
 	// Sensor module's thoughts about its environment
@@ -122,7 +124,7 @@ static void processSensor()
 #define GARAGE_CLOSE_TIME_MS REMOTE_ASSERT_TIME_MS + 10000
 // Min amount of time to assert the garage door remote button from cmd receipt
 #define REMOTE_ASSERT_TIME_MS 500
-static void handleDoorCmd()
+static void handleDoorCmd(void)
 {
 	// Implemented as state machine to allow for deterministic function duration
 
@@ -196,15 +198,17 @@ static void handleDoorCmd()
 	}
 	return;
 }
+
 // Input into garage sensor from MQTT interface
-static void handleMQTTInputData()
+static void handleMQTTInputData(void)
 {
 	handleDoorCmd();
 	// Could support other commands here
 	return;
 }
+
 // This function is used to report door and system state info
-static void publishDoorStateData()
+static void publishDoorStateData(void)
 {
 	const char* doorStateTable[doorState_enumTypeSize];
 	doorStateTable[OPENED] = "opened";
@@ -234,8 +238,9 @@ static void publishDoorStateData()
 
 	return;
 }
+
 // This function is used to report debug info about the system
-static void publishDebugData()
+static void publishDebugData(void)
 {
 	char generalBuffer[100];
 
@@ -272,9 +277,10 @@ static void publishDebugData()
 	return;
 
 }
+
 // Garage sensor publishes some data to MQTT subscribers. This is the function
 // that will handle that.
-static void handleMQTTOutputData()
+static void handleMQTTOutputData(void)
 {
 	// Let Raspberry PI know about the door state
 	publishDoorStateData();
@@ -283,7 +289,8 @@ static void handleMQTTOutputData()
 	return;
 
 }
-static void processMQTT()
+
+static void processMQTT(void)
 {
 	// Sender(s)->MQTT->Garage Sensor
 	handleMQTTInputData();
@@ -292,7 +299,8 @@ static void processMQTT()
 
 	return;
 }
-static void getInputData()
+
+static void getInputData(void)
 {
 
 	GetMQTTData(&sysMgrInputData.mqttData);
@@ -301,12 +309,14 @@ static void getInputData()
 	return;
 
 }
+
 /*------------------------------------------------------------------------------
  --|
  --| Public Function Bodies
  --|
  ------------------------------------------------------------------------------*/
-extern void InitSystemManager()
+
+extern void InitSystemManager(void)
 {
 
 	// Pin for garage door actuator (hacked remote)
@@ -328,8 +338,9 @@ extern void InitSystemManager()
 	digitalWrite(GREEN_LED, LOW);
 	return;
 }
+
 // Must be called every frame
-extern void ManageSystemManager()
+extern void ManageSystemManager(void)
 {
 	// Get the input data we need in order to make decisions
 	getInputData();
@@ -340,4 +351,3 @@ extern void ManageSystemManager()
 
 	return;
 }
-

@@ -10,6 +10,7 @@
 --| Includes
 --|
 -----------------------------------------------------------------------------*/
+
 #include "Arduino.h"
 #include "Utilities.h"
 
@@ -27,11 +28,14 @@
 --|
 ------------------------------------------------------------------------------*/
 
+/* None */
+
 /*------------------------------------------------------------------------------
 --|
 --| Public Function Bodies
 --|
 ------------------------------------------------------------------------------*/
+
 extern void SetStatus(sysState_enumType status)
 {
 	pinMode(RED_LED, OUTPUT);
@@ -63,7 +67,7 @@ extern void FatalFault(bool alarm)
 	pinMode(ALARM, OUTPUT);
 	digitalWrite(ALARM, HIGH);
 	}
+
 	// Pet our dog to prevent reboot.
 	while(1){ESP.wdtFeed();}
-
 }

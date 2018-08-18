@@ -29,7 +29,6 @@
 ------------------------------------------------------------------------------*/
 #define HEARTBEAT_LED D2
 
-
 /*------------------------------------------------------------------------------
 --|
 --| Types
@@ -77,7 +76,6 @@ static const foregroundFunct_StructType ExecFrameTable [] =
 
 
 /*-----Exec's Output Init-----*/
-
 static const ExecOutput_structType execOutputInit =
 {
 	0,
@@ -96,5 +94,6 @@ static ExecOutput_structType execOut;
 --|
 ------------------------------------------------------------------------------*/
 
+/* None */
 
 #endif /* EXECUTIVE_EXECUTIVE_PVT_H_ */

@@ -45,9 +45,9 @@
 --| Function Specifications
 --|
 ------------------------------------------------------------------------------*/
+
 // Must be called prior to any of the other functions within this module
 extern void InitSystemManager();
 extern void ManageSystemManager();
-
 
 #endif /* SYSTEMMANAGER_STATEMANAGER_H_ */
