@@ -212,7 +212,9 @@ extern void ManageGarageSensor(void)
 		// If this new sample is within tolerance of the established distance
 		if (currentDistance > 0
 				&& WITHIN_TOLERANCE(currentDistance, stableDistance))
+		{
 			stableSamplesCount++;
+		}
 
 		// Otherwise, reset our counters and distance and try again
 		else

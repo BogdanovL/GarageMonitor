@@ -93,7 +93,9 @@ extern void InitMQTTCom(void)
 	while (WiFi.status() != WL_CONNECTED)
 	{
 		delay(100);
+#if DEBUG
 		printf("Connecting to WiFi..\n");
+#endif
 	}
 
 	// Specify the address and the port of the MQTT server.

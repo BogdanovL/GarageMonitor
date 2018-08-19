@@ -41,8 +41,9 @@ static void getUpTime(uptime_structType *upTime)
 	unsigned long currentMillis = millis();
 
 	if (currentMillis < lastMillis)
+	{
 		rollover++;
-
+	}
 	unsigned seconds = currentMillis/1000 + (rollover * ULONG_MAX/1000);
 
 	lastMillis = currentMillis;
