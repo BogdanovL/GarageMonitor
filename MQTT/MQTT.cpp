@@ -89,7 +89,6 @@ extern void InitMQTTCom(void)
 	// Connect to the WiFI Network
 	WiFi.begin(ssid, password);
 
-	// Temp...for debug...
 	while (WiFi.status() != WL_CONNECTED)
 	{
 		delay(100);
